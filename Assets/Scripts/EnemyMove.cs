@@ -23,7 +23,8 @@ public class EnemyMove : MonoBehaviour
     // --------------------- Movement ---------------------
      void Movement()
     {
-        transform.LookAt(movementPoint.transform);
+        transform.LookAt(movementPoint.transform.position);
         transform.position += transform.forward * speed * Time.deltaTime;
+        transform.position = new Vector3(transform.position.x, 1.2f, transform.position.z);
     }
 }
