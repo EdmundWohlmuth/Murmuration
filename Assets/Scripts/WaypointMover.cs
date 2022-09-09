@@ -25,6 +25,7 @@ public class WaypointMover : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 transform.position = hit.point;
+                transform.position = new Vector3(transform.position.x, transform.position.y + 1.2f, transform.position.z);
             }
         }
     }

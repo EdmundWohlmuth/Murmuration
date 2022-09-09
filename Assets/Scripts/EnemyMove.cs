@@ -6,7 +6,8 @@ public class EnemyMove : MonoBehaviour
 {
     public GameObject movementPoint;
 
-    float speed = 3f;
+    float speed = 5f;
+    float rotationSpeed = 3f;
 
     // Start is called before the first frame update
     void Start()
@@ -23,8 +24,16 @@ public class EnemyMove : MonoBehaviour
     // --------------------- Movement ---------------------
      void Movement()
     {
-        transform.LookAt(movementPoint.transform.position);
-        transform.position += transform.forward * speed * Time.deltaTime;
-        transform.position = new Vector3(transform.position.x, 1.2f, transform.position.z);
+        // OLD "SNAP TO ROTATION" CODE
+        //transform.LookAt(movementPoint.transform.position);
+        //transform.position += transform.forward * speed * Time.deltaTime;
+
+        //NEW QUANTERNIONS
+        Vector3 reletivePos = movementPoint.transform.position - transform.position; // Get total rotation requierd
+        Quaternion rotation = Quaternion.LookRotation(reletivePos);                 // set the nessesary rotation ammount
+        Quaternion current = transform.localRotation; //current rotation values
+
+        transform.localRotation = Quaternion.Slerp(current, rotation, rotationSpeed * Time.deltaTime); // turn object over time
+        transform.position += transform.forward * speed * Time.deltaTime; // moves character
     }
 }
