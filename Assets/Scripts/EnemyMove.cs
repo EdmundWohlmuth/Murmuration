@@ -6,13 +6,14 @@ public class EnemyMove : MonoBehaviour
 {
     public GameObject movementPoint;
 
-    float speed = 5f;
-    float rotationSpeed = 3f;
+    float speed;
+    float rotationSpeed;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        speed = Random.Range(3.5f, 6.5f);
+        rotationSpeed = Random.Range(0.5f, 3f);
     }
 
     // Update is called once per frame
