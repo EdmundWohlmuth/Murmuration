@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-    int totalEnemies = 10;
+    public int totalEnemies = 25;
     int waitTime = 2;
 
-    public GameObject Enemey;
+    public GameObject enemyChar;
     public GameObject movePoint;
-    GameObject[] Enemies = new GameObject[10];
+    GameObject[] Enemey = new GameObject[10];
 
     // Start is called before the first frame update
     void Start()
     {
+        Enemey = new GameObject[totalEnemies];
         SpawnEnemeis();
     }
 
@@ -27,8 +28,8 @@ public class EnemyManager : MonoBehaviour
     {
         for (int i = 0; i < totalEnemies ; i++)
         {
-            Enemies[i] = Instantiate(Enemey);
-            Enemies[i].GetComponent<EnemyMove>().movementPoint = movePoint;
+            Enemey[i] = Instantiate(enemyChar);
+            Enemey[i].GetComponent<EnemyMove>().movementPoint = movePoint;
         }
     }
 
@@ -40,37 +41,12 @@ public class EnemyManager : MonoBehaviour
             {
                 if (i != k) // makes sure to not check against itself
                 {
-                    //Debug.Log(i + " " + k);
-                    // checks to see if the enemy needs to move away from its peers
+                    if (Vector3.Distance(Enemey[i].transform.position, Enemey[k].transform.position) < 2f)
+                    {
+                        Vector3 moveAway = Vector3.MoveTowards(Enemey[i].transform.position, Enemey[k].transform.position, - 2f);
+                        Enemey[i].transform.Translate(moveAway * 0.5f * Time.deltaTime);
 
-                    // X
-                    if (Enemies[i].transform.position.x <
-                        Enemies[k].transform.position.x + 2 &&
-                        Enemies[i].transform.position.x !>
-                        Enemies[k].transform.position.x + 2)
-                    {
-                        //++
-                        
-                    }
-                    else if (Enemies[i].transform.position.x >
-                        Enemies[k].transform.position.x - 2 &&
-                        Enemies[i].transform.position.x !<
-                        Enemies[k].transform.position.x - 2)
-                    {
-                        //--
-                    }
-
-                    // Z
-                    if (Enemies[i].transform.position.z >
-                        Enemies[k].transform.position.z + 2)
-                    {
-                        
-                        //++
-                    }
-                    else if (Enemies[i].transform.position.z <
-                        Enemies[k].transform.position.z - 2)
-                    {
-                        //--
+                       // Debug.Log("Enemy " + i + " Distance to " + "Enemy " + k + " is: " + Vector3.Distance(Enemies[i].transform.position, Enemies[k].transform.position));
                     }
                 }
             }
