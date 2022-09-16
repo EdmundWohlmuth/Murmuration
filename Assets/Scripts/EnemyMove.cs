@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyMove : MonoBehaviour
 {
     public GameObject movementPoint;
+    public GameObject body;
 
     float speed;
     float rotationSpeed;
@@ -24,7 +25,7 @@ public class EnemyMove : MonoBehaviour
 
     // --------------------- Movement ---------------------
      void Movement()
-    {
+     {
         // OLD "SNAP TO ROTATION" CODE
         //transform.LookAt(movementPoint.transform.position);
         //transform.position += transform.forward * speed * Time.deltaTime;
@@ -36,5 +37,6 @@ public class EnemyMove : MonoBehaviour
 
         transform.localRotation = Quaternion.Slerp(current, rotation, rotationSpeed * Time.deltaTime); // turn object over time
         transform.position += transform.forward * speed * Time.deltaTime; // moves character
-    }
+     } 
+
 }
