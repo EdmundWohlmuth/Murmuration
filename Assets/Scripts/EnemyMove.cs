@@ -6,6 +6,7 @@ public class EnemyMove : MonoBehaviour
 {
     public GameObject movementPoint;
     public GameObject body;
+    Rigidbody rb;
 
     public float speed;
     float rotationSpeed;
@@ -24,7 +25,7 @@ public class EnemyMove : MonoBehaviour
         Movement();
     }
 
-    // --------------------- Movement ---------------------
+    // --------------------- Movement -------------------------------
      void Movement()
      {
         // OLD "SNAP TO ROTATION" CODE
@@ -40,29 +41,17 @@ public class EnemyMove : MonoBehaviour
         transform.position += transform.forward * speed * Time.deltaTime; // moves character
      }
 
-    void CheckEnemeis()
+    private void OnCollisionEnter(Collision collision)
     {
-        
-
-        /*for (int i = 0; i < GetComponent<EnemyManager>().totalEnemies; i++) // List all enemeis
+        if (collision.transform.tag == "Enemy")
         {
-            for (int k = 0; k < GetComponent<EnemyManager>().totalEnemies; k++) // Enemy being checked
-            {
-                if (i != k) // makes sure to not check against itself
-                {
-                    if (Vector3.Distance(Enemey[i].transform.position, Enemey[k].transform.position) <= 3.5f)
-                    {
-                        Vector3 enemyI = new Vector3(Enemey[i].transform.position.x, 0, Enemey[i].transform.position.z);
-                        Vector3 enemyK = new Vector3(Enemey[k].transform.position.x, 0, Enemey[k].transform.position.z);
+            Debug.Log("Collsion");
 
-                        Vector3 moveAway = enemyI -= enemyK;
-                        Enemey[i].transform.Translate(moveAway * Time.deltaTime);
+            Vector3 thisPos = new Vector3(transform.position.x, 0, transform.position.z);
+            Vector3 collisionPos = new Vector3(collision.transform.position.x, 0, collision.transform.position.z);
 
-                        // Debug.Log("Enemy " + i + " Distance to " + "Enemy " + k + " is: " + Vector3.Distance(Enemies[i].transform.position, Enemies[k].transform.position));
-                    }
-                }
-            }
-        }*/
+            Vector3 moveAway = thisPos -= collisionPos;
+            transform.Translate(moveAway * 2 * Time.deltaTime);
+        }
     }
-
 }

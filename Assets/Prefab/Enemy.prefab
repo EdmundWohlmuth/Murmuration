@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 8778688392782776213}
   - component: {fileID: 8778688392782776218}
-  m_Layer: 0
+  - component: {fileID: 8608728811275860241}
+  m_Layer: 2
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -49,6 +50,20 @@ MonoBehaviour:
   body: {fileID: 8778688392798070125}
   speed: 0
   enemyNum: 0
+--- !u!136 &8608728811275860241
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8778688392782776212}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 2
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8778688392798070125
 GameObject:
   m_ObjectHideFlags: 0
@@ -60,7 +75,6 @@ GameObject:
   - component: {fileID: 8778688392798070098}
   - component: {fileID: 8778688392798070097}
   - component: {fileID: 8778688392798070096}
-  - component: {fileID: 8778688392798070099}
   m_Layer: 2
   m_Name: Body
   m_TagString: Untagged
@@ -133,17 +147,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &8778688392798070099
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8778688392798070125}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}

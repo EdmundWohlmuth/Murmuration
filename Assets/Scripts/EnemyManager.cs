@@ -22,7 +22,7 @@ public class EnemyManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       // CheckEnemeis();
+       //CheckEnemeis();
     }
 
     void SpawnEnemeis()
@@ -38,6 +38,7 @@ public class EnemyManager : MonoBehaviour
             {
                 if (i != k) // makes sure to not check against itself
                 {
+                    // OLD DETECTION SYSTEM
                     if (Vector3.Distance(Enemey[i].transform.position, Enemey[k].transform.position) <= 3.5f)
                     {
                         Vector3 enemyI = new Vector3(Enemey[i].transform.position.x, 0, Enemey[i].transform.position.z);
@@ -46,8 +47,9 @@ public class EnemyManager : MonoBehaviour
                         Vector3 moveAway = enemyI -= enemyK;
                         Enemey[i].transform.Translate(moveAway * Time.deltaTime);
 
-                        // Debug.Log("Enemy " + i + " Distance to " + "Enemy " + k + " is: " + Vector3.Distance(Enemies[i].transform.position, Enemies[k].transform.position));
+                        //Debug.Log("Enemy " + i + " Distance to " + "Enemy " + k + " is: " + Vector3.Distance(Enemey[i].transform.position, Enemey[k].transform.position));
                     }
+
                 }
             }
         }
@@ -67,11 +69,13 @@ public class EnemyManager : MonoBehaviour
 
                 // instantiate enemy
                 Enemey[i] = Instantiate(enemyChar);
+                Enemey[i].transform.parent = transform;
                 Enemey[i].GetComponent<EnemyMove>().movementPoint = movePoint;
                 Enemey[i].GetComponent<EnemyMove>().enemyNum = i;
                 // Enemey[i].GetComponent<EnemyMove>().body.GetComponent<Renderer>().material.color = color;
 
-                yield return new WaitForSeconds(2);
+                
+                yield return new WaitForSeconds(1);
             }
             isWaiting = false;
         }     
