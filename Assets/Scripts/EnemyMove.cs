@@ -7,8 +7,9 @@ public class EnemyMove : MonoBehaviour
     public GameObject movementPoint;
     public GameObject body;
 
-    float speed;
+    public float speed;
     float rotationSpeed;
+    public int enemyNum;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +38,31 @@ public class EnemyMove : MonoBehaviour
 
         transform.localRotation = Quaternion.Slerp(current, rotation, rotationSpeed * Time.deltaTime); // turn object over time
         transform.position += transform.forward * speed * Time.deltaTime; // moves character
-     } 
+     }
+
+    void CheckEnemeis()
+    {
+        
+
+        /*for (int i = 0; i < GetComponent<EnemyManager>().totalEnemies; i++) // List all enemeis
+        {
+            for (int k = 0; k < GetComponent<EnemyManager>().totalEnemies; k++) // Enemy being checked
+            {
+                if (i != k) // makes sure to not check against itself
+                {
+                    if (Vector3.Distance(Enemey[i].transform.position, Enemey[k].transform.position) <= 3.5f)
+                    {
+                        Vector3 enemyI = new Vector3(Enemey[i].transform.position.x, 0, Enemey[i].transform.position.z);
+                        Vector3 enemyK = new Vector3(Enemey[k].transform.position.x, 0, Enemey[k].transform.position.z);
+
+                        Vector3 moveAway = enemyI -= enemyK;
+                        Enemey[i].transform.Translate(moveAway * Time.deltaTime);
+
+                        // Debug.Log("Enemy " + i + " Distance to " + "Enemy " + k + " is: " + Vector3.Distance(Enemies[i].transform.position, Enemies[k].transform.position));
+                    }
+                }
+            }
+        }*/
+    }
 
 }

@@ -47,6 +47,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementPoint: {fileID: 0}
   body: {fileID: 8778688392798070125}
+  speed: 0
+  enemyNum: 0
 --- !u!1 &8778688392798070125
 GameObject:
   m_ObjectHideFlags: 0
