@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99f6eac0cea1e8045986637df94f2cd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalEnemies: 10
+  totalEnemies: 50
   enemyChar: {fileID: 8778688392782776212, guid: a66d0ee1f84ebb74e918ace25858faba, type: 3}
   movePoint: {fileID: 1456219380}
   AllEnemies:
@@ -181,7 +181,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  neighborDistance: 2
+  neighborDistance: 5
 --- !u!1 &322996325
 GameObject:
   m_ObjectHideFlags: 0

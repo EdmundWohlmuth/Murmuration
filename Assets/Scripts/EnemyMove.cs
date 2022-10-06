@@ -6,10 +6,10 @@ public class EnemyMove : MonoBehaviour
 {
     public GameObject movementPoint;
     public GameObject body;
-    Rigidbody rb;
+    bool isTooClose;
 
     public float speed;
-    float rotationSpeed;
+    public float rotationSpeed;
     public int enemyNum;
 
     // Start is called before the first frame update
@@ -22,23 +22,24 @@ public class EnemyMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        SetRules();
-        Movement();
+        SetMovement();
     }
 
     // --------------------- Movement -------------------------------
-     void Movement()
+     void MoveTo(Vector3 Goto)
      {
-        Vector3 reletivePos = movementPoint.transform.position - transform.position; // Get total rotation requierd
-        Quaternion rotation = Quaternion.LookRotation(reletivePos);                 // set the nessesary rotation ammount
+        Vector3 reletivePos = Goto - transform.position; // Get total rotation requierd
+        Quaternion rotation = Quaternion.LookRotation(reletivePos); // set the nessesary rotation ammount
         Quaternion current = transform.localRotation; //current rotation values
 
         transform.localRotation = Quaternion.Slerp(current, rotation, rotationSpeed * Time.deltaTime); // turn object over time
         transform.position += transform.forward * speed * Time.deltaTime; // moves character
      }
 
-    void SetRules()
+    void SetMovement()
     {
+        Vector3 wayPointPos = movementPoint.transform.position;
+
         GameObject[] flock;
         flock = EnemyManager.EM.AllEnemies;
         Vector3 center = Vector3.zero;
@@ -53,14 +54,21 @@ public class EnemyMove : MonoBehaviour
                 if (distance <= EnemyManager.EM.neighborDistance)
                 {
                     center += Ei.transform.position;
-                    if (distance < 1.0f)
+                    if (distance < 4.0f)
                     {
-                        avoid = avoid + (transform.position - Ei.transform.position);
-                        Debug.Log(avoid);
+                        avoid = avoid + (transform.position - Ei.transform.position);                       
+                        isTooClose = true;
                     }
+                    else isTooClose = false;
                 }
             }
         }
+
+        avoid = new Vector3(avoid.x, 1, avoid.z);
+        wayPointPos = new Vector3(wayPointPos.x, 1, wayPointPos.z);
+
+        if (isTooClose) MoveTo(avoid);
+        else MoveTo(wayPointPos);
     }
 
 }
